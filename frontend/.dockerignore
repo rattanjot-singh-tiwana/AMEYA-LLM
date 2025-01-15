@@ -1,0 +1,11 @@
+node_modules
+*.log
+fe
+.next
+.next/cache
+out
+build
+.cache
+.git
+.gitignore
+.vscode

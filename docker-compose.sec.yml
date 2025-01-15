@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+     context: ./backend-email-automation
+     dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    secrets:
+      - credentials
+    volumes:
+        - ./token.json:/app/token.json
+  frontend:
+    build:
+     context: ./frontend
+     dockerfile: Dockerfile2
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+secrets:
+  credentials:
+    file: ./credentials.json
+           
+
+#GMAIL TOOLS.py
+    # def _get_gmail_service(self):
+    #     creds = None
+    #     if os.path.exists('/app/token.json'):
+    #         creds = Credentials.from_authorized_user_file('/app/token.json', SCOPES)
+    #     if not creds or not creds.valid:
+    #         if creds and creds.expired and creds.refresh_token:
+    #             creds.refresh(Request())
+    #         else:
+    #             flow = InstalledAppFlow.from_client_secrets_file('/run/secrets/credentials', SCOPES)
+    #             creds = flow.run_local_server(port=0)
+    #         with open('/app/token.json', 'w') as token:
+    #             token.write(creds.to_json())

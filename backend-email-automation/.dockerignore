@@ -1,0 +1,7 @@
+backend
+__pycache__
+evenv1
+deploy_api_old.py
+credentials.json
+token.json
+.env
